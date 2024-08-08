@@ -44,7 +44,8 @@ final listPolyLinesProvider = FutureProvider<List<LatLng>>((ref) async {
 class PolylinesNotifier extends StateNotifier<Polyline> {
   PolylinesNotifier() : super(const Polyline(polylineId: PolylineId("INIT")));
 
-  Future<void> addRoutePolyline(LatLng start, LatLng end, List<PolylineWayPoint> wayPoints,Color color, String value) async {
+  Future<void> addRoutePolyline(LatLng start, LatLng end,
+      List<PolylineWayPoint> wayPoints, Color color, String value) async {
     List<LatLng> polylineCoordinates = [];
 
     PolylinePoints polylinePoints = PolylinePoints();
@@ -63,11 +64,10 @@ class PolylinesNotifier extends StateNotifier<Polyline> {
     }
 
     final polyline = Polyline(
-      polylineId: PolylineId(value),
-      color: color,
-      points: polylineCoordinates,
-      width: 2
-    );
+        polylineId: PolylineId(value),
+        color: color,
+        points: polylineCoordinates,
+        width: 2);
 
     state = polyline;
   }
@@ -78,12 +78,19 @@ class PolylinesNotifier extends StateNotifier<Polyline> {
     switch (value) {
       case "3DeOctA":
         await addRoutePolyline(
-          rutaCotumAida["startLocation"], 
-          rutaCotumAida["endLocation"], 
-          rutaCotumAida["wayPoints"],
-          routesColor[0]["color"],
-          "3DeOctA"
-        );
+            rutaCotumAida["startLocation"],
+            rutaCotumAida["endLocation"],
+            rutaCotumAida["wayPoints"],
+            routesColor[0]["color"],
+            "3DeOctA");
+        break;
+      case "Graficos":
+        await addRoutePolyline(
+            rutaGraficosIda["startLocation"],
+            rutaGraficosIda["endLocation"],
+            rutaGraficosIda["wayPoints"],
+            routesColor[2]["color"],
+            "Graficos");
         break;
       default:
     }
@@ -98,22 +105,3 @@ final polylinesProvider =
     StateNotifierProvider<PolylinesNotifier, Polyline>((ref) {
   return PolylinesNotifier();
 });
-
-// //Cambio de index para el titulo del mapa
-// class SelectedRouteNotifier extends StateNotifier<int> {
-//   SelectedRouteNotifier(this.ref) : super(0);
-
-//   final ProviderReference ref;
-
-//   void selectRoute(int index) {
-//     state = index;
-//   }
-
-//   Future<void> addPolylineForSelectedRoute(LatLng start, LatLng end, String googleApiKey, Color color) async {
-//     await ref.read(polylinesProvider.notifier).addRoutePolyline(start, end, googleApiKey, color);
-//   }
-// }
-
-// final selectedRouteProvider = StateNotifierProvider<SelectedRouteNotifier, int>((ref) {
-//   return SelectedRouteNotifier(ref);
-// });

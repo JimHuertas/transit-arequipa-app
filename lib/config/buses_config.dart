@@ -74,7 +74,7 @@ final List<Map<String, dynamic>> busesList = [
     { 
       'id': "4",
       'image': Image.asset("assets/bus-graficos.png"),
-      'title': "C7 Unión AQP",
+      'title': "C4 Unión AQP", 
       'rutas': "7 rutas", 
       'menuOptions': const <PopupMenuEntry<String>>[
         PopupMenuItem<String>(
